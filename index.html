@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Utilization Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Staff Utilization Calculator</h1>
+        
+        <div class="section">
+            <h3 class="section-header">Staff Availability</h3>
+            <div class="input-group">
+                <label for="annualLeave">Annual Leave (days):</label>
+                <input type="number" id="annualLeave" value="25">
+            </div>
+
+            <div class="input-group">
+                <label for="bankHolidays">Bank Holidays (days):</label>
+                <input type="number" id="bankHolidays" value="8">
+            </div>
+
+            <div class="input-group">
+                <label for="sickLeave">Sick Leave (days):</label>
+                <input type="number" id="sickLeave" value="5">
+            </div>
+
+            <div class="input-group">
+                <label for="hoursPerDay">Hours per Day:</label>
+                <input type="number" id="hoursPerDay" value="7.4" step="0.1">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-header">Project Details</h3>
+            <div class="input-group">
+                <label for="programValue">Program Value (£):</label>
+                <input type="number" id="programValue" value="400000" step="1000">
+            </div>
+        </div>
+
+        <div class="section">
+            <h3 class="section-header">Project Hours</h3>
+            <div class="input-group">
+                <label for="designHoursPerProject">Design Hours (per project):</label>
+                <input type="number" id="designHoursPerProject" value="320">
+            </div>
+
+            <div class="input-group">
+                <label for="supervisionHoursPerProject">Supervision Hours (per project):</label>
+                <input type="number" id="supervisionHoursPerProject" value="480">
+            </div>
+
+            <div class="input-group">
+                <label for="adminHoursPerProject">Admin Hours (per project):</label>
+                <input type="number" id="adminHoursPerProject" value="160">
+            </div>
+        </div>
+
+        <div class="results">
+            <h3>Results</h3>
+            <div class="results-content">
+                <p>Net Working Days: <span id="netDays">-</span></p>
+                <p>Available Hours: <span id="availableHours">-</span></p>
+                <p>Hours Required:</p>
+                <ul>
+                    <li>Design: <span id="totalDesignHours">-</span></li>
+                    <li>Supervision: <span id="totalSupervisionHours">-</span></li>
+                    <li>Admin: <span id="totalAdminHours">-</span></li>
+                    <li>Total Required Hours: <span id="totalRequiredHours">-</span></li>
+                </ul>
+                <p class="utilization-rate">Utilization Rate: <span id="utilizationRate">-</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
