@@ -32,14 +32,10 @@ function calculateUtilisation() {
     const netDays = workingDays - values.annualLeave - values.bankHolidays - values.sickLeave;
     const availableHours = netDays * values.hoursPerDay;
 
-    // Calculate project count based on programme value
-    // This is an example calculation - adjust the divisor based on your needs
-    const projectCount = Math.ceil(values.programmeValue / 100000); // One project per £100,000
-
-    // Calculate total hours required across all projects
-    const totalDesignHours = values.designHoursPerProject * projectCount;
-    const totalSupervisionHours = values.supervisionHoursPerProject * projectCount;
-    const totalAdministrationHours = values.administrationHoursPerProject * projectCount;
+    // Use hours directly from inputs (single project)
+    const totalDesignHours = values.designHoursPerProject;
+    const totalSupervisionHours = values.supervisionHoursPerProject;
+    const totalAdministrationHours = values.administrationHoursPerProject;
     const totalRequiredHours = totalDesignHours + totalSupervisionHours + totalAdministrationHours;
     
     // Calculate utilisation rate
