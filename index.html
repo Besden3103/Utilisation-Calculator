@@ -1,104 +1,86 @@
-// Get all input elements
-const inputs = {
-    annualLeave: document.getElementById('annualLeave'),
-    bankHolidays: document.getElementById('bankHolidays'),
-    sickLeave: document.getElementById('sickLeave'),
-    hoursPerDay: document.getElementById('hoursPerDay'),
-    projectName: document.getElementById('projectName'),
-    projectValue: document.getElementById('projectValue'),
-    designHoursPerProject: document.getElementById('designHoursPerProject'),
-    supervisionHoursPerProject: document.getElementById('supervisionHoursPerProject'),
-    administrationHoursPerProject: document.getElementById('administrationHoursPerProject')
-};
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Utilisation Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Staff Utilisation Calculator</h1>
+        
+        <div class="section">
+            <h3 class="section-header">Staff Availability</h3>
+            <div class="input-group">
+                <label for="annualLeave">Annual Leave (days):</label>
+                <input type="number" id="annualLeave" value="25">
+            </div>
 
-// Get all result elements
-const results = {
-    displayProjectName: document.getElementById('displayProjectName'),
-    displayProjectValue: document.getElementById('displayProjectValue'),
-    netDays: document.getElementById('netDays'),
-    availableHours: document.getElementById('availableHours'),
-    totalDesignHours: document.getElementById('totalDesignHours'),
-    totalSupervisionHours: document.getElementById('totalSupervisionHours'),
-    totalAdministrationHours: document.getElementById('totalAdministrationHours'),
-    totalRequiredHours: document.getElementById('totalRequiredHours'),
-    utilisationRate: document.getElementById('utilisationRate')
-};
+            <div class="input-group">
+                <label for="bankHolidays">Bank Holidays (days):</label>
+                <input type="number" id="bankHolidays" value="8">
+            </div>
 
-// Function to format number with commas
-function formatNumber(num) {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+            <div class="input-group">
+                <label for="sickLeave">Sick Leave (days):</label>
+                <input type="number" id="sickLeave" value="5">
+            </div>
 
-// Function to parse number string with commas
-function parseNumberWithCommas(str) {
-    return parseFloat(str.replace(/,/g, '')) || 0;
-}
+            <div class="input-group">
+                <label for="hoursPerDay">Hours per Day:</label>
+                <input type="number" id="hoursPerDay" value="7.4" step="0.1">
+            </div>
+        </div>
 
-// Function to format project value input
-function formatProjectValue(input) {
-    // Remove any non-digit characters except commas
-    let value = input.value.replace(/[^\d,]/g, '');
-    // Remove existing commas
-    value = value.replace(/,/g, '');
-    // Add commas for thousands
-    value = value ? formatNumber(parseInt(value)) : '';
-    input.value = value;
-}
+        <div class="section">
+            <h3 class="section-header">Project Details</h3>
+            <div class="input-group">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" placeholder="Enter project name">
+            </div>
+            <div class="input-group">
+                <label for="projectValue">Project Value (£):</label>
+                <input type="text" id="projectValue" value="500,000" inputmode="numeric">
+            </div>
+        </div>
 
-function calculateUtilisation() {
-    // Get input values
-    const values = {
-        annualLeave: parseFloat(inputs.annualLeave.value) || 0,
-        bankHolidays: parseFloat(inputs.bankHolidays.value) || 0,
-        sickLeave: parseFloat(inputs.sickLeave.value) || 0,
-        hoursPerDay: parseFloat(inputs.hoursPerDay.value) || 0,
-        projectName: inputs.projectName.value,
-        projectValue: parseNumberWithCommas(inputs.projectValue.value),
-        designHoursPerProject: parseFloat(inputs.designHoursPerProject.value) || 0,
-        supervisionHoursPerProject: parseFloat(inputs.supervisionHoursPerProject.value) || 0,
-        administrationHoursPerProject: parseFloat(inputs.administrationHoursPerProject.value) || 0
-    };
+        <div class="section">
+            <h3 class="section-header">Project Hours</h3>
+            <div class="input-group">
+                <label for="designHoursPerProject">Design Hours:</label>
+                <input type="number" id="designHoursPerProject" value="40">
+            </div>
 
-    // Calculate working days
-    const workingDays = 260; // 52 weeks × 5 days
-    const netDays = workingDays - values.annualLeave - values.bankHolidays - values.sickLeave;
-    const availableHours = netDays * values.hoursPerDay;
+            <div class="input-group">
+                <label for="supervisionHoursPerProject">Supervision Hours:</label>
+                <input type="number" id="supervisionHoursPerProject" value="225">
+            </div>
 
-    // Use hours directly from inputs (single project)
-    const totalDesignHours = values.designHoursPerProject;
-    const totalSupervisionHours = values.supervisionHoursPerProject;
-    const totalAdministrationHours = values.administrationHoursPerProject;
-    const totalRequiredHours = totalDesignHours + totalSupervisionHours + totalAdministrationHours;
-    
-    // Calculate utilisation rate
-    const utilisationRate = (totalRequiredHours / availableHours) * 100;
+            <div class="input-group">
+                <label for="administrationHoursPerProject">Administration Hours:</label>
+                <input type="number" id="administrationHoursPerProject" value="160">
+            </div>
+        </div>
 
-    // Update results
-    results.displayProjectName.textContent = values.projectName || '-';
-    results.displayProjectValue.textContent = values.projectValue ? formatNumber(values.projectValue) : '-';
-    results.netDays.textContent = netDays.toFixed(0);
-    results.availableHours.textContent = availableHours.toFixed(1);
-    results.totalDesignHours.textContent = totalDesignHours.toFixed(1);
-    results.totalSupervisionHours.textContent = totalSupervisionHours.toFixed(1);
-    results.totalAdministrationHours.textContent = totalAdministrationHours.toFixed(1);
-    results.totalRequiredHours.textContent = totalRequiredHours.toFixed(1);
-    results.utilisationRate.textContent = utilisationRate.toFixed(1) + '%';
-}
-
-// Add event listeners to all inputs
-Object.values(inputs).forEach(input => {
-    if (input.id === 'projectValue') {
-        input.addEventListener('input', function() {
-            formatProjectValue(this);
-            calculateUtilisation();
-        });
-    } else {
-        input.addEventListener('input', calculateUtilisation);
-    }
-});
-
-// Format project value on page load
-document.addEventListener('DOMContentLoaded', () => {
-    formatProjectValue(inputs.projectValue);
-    calculateUtilisation();
-});
+        <div class="results">
+            <h3>Results</h3>
+            <div class="results-content">
+                <p>Project: <span id="displayProjectName">-</span></p>
+                <p>Project Value: £<span id="displayProjectValue">-</span></p>
+                <p>Net Working Days: <span id="netDays">-</span></p>
+                <p>Available Hours: <span id="availableHours">-</span></p>
+                <p>Hours Required:</p>
+                <ul>
+                    <li>Design: <span id="totalDesignHours">-</span></li>
+                    <li>Supervision: <span id="totalSupervisionHours">-</span></li>
+                    <li>Administration: <span id="totalAdministrationHours">-</span></li>
+                    <li>Total Required Hours: <span id="totalRequiredHours">-</span></li>
+                </ul>
+                <p class="utilization-rate">Utilisation Rate: <span id="utilisationRate">-</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
