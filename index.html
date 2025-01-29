@@ -34,27 +34,31 @@
         </div>
 
         <div class="section">
-            <h3 class="section-header">Programme Details</h3>
+            <h3 class="section-header">Project Details</h3>
             <div class="input-group">
-                <label for="programmeValue">Programme Value (£):</label>
-                <input type="number" id="programmeValue" value="400000" step="1000">
+                <label for="projectName">Project Name:</label>
+                <input type="text" id="projectName" placeholder="Enter project name">
+            </div>
+            <div class="input-group">
+                <label for="projectValue">Project Value (£):</label>
+                <input type="text" id="projectValue" value="500,000" inputmode="numeric">
             </div>
         </div>
 
         <div class="section">
             <h3 class="section-header">Project Hours</h3>
             <div class="input-group">
-                <label for="designHoursPerProject">Design Hours (per project):</label>
-                <input type="number" id="designHoursPerProject" value="320">
+                <label for="designHoursPerProject">Design Hours:</label>
+                <input type="number" id="designHoursPerProject" value="40">
             </div>
 
             <div class="input-group">
-                <label for="supervisionHoursPerProject">Supervision Hours (per project):</label>
-                <input type="number" id="supervisionHoursPerProject" value="480">
+                <label for="supervisionHoursPerProject">Supervision Hours:</label>
+                <input type="number" id="supervisionHoursPerProject" value="225">
             </div>
 
             <div class="input-group">
-                <label for="administrationHoursPerProject">Administration Hours (per project):</label>
+                <label for="administrationHoursPerProject">Administration Hours:</label>
                 <input type="number" id="administrationHoursPerProject" value="160">
             </div>
         </div>
@@ -62,6 +66,8 @@
         <div class="results">
             <h3>Results</h3>
             <div class="results-content">
+                <p>Project: <span id="displayProjectName">-</span></p>
+                <p>Project Value: £<span id="displayProjectValue">-</span></p>
                 <p>Net Working Days: <span id="netDays">-</span></p>
                 <p>Available Hours: <span id="availableHours">-</span></p>
                 <p>Hours Required:</p>
